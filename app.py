@@ -1,7 +1,9 @@
+# ---- Import ----
 import tkinter as tk
 from tkinter import messagebox
 import random
 
+# ---- Função gerador ----
 def gerador():
     inicio = num_inicio.get()
     final = num_final.get()
@@ -21,6 +23,7 @@ def gerador():
         except:
             messagebox.showinfo("Sorteador", "Verifique se você digitou valores válidos.")
 
+# ---- Configuração da interface gráfica ----
 janela = tk.Tk()
 janela.title("Sorteador")
 janela.geometry("300x270+400+150")
