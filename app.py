@@ -1,5 +1,6 @@
 # ---- Import ----
 import tkinter as tk
+from tkinter import ttk
 from tkinter import messagebox
 import random
 
@@ -23,38 +24,58 @@ def gerador():
         except:
             messagebox.showinfo("Sorteador", "Verifique se você digitou valores válidos.")
 
-# ---- Configuração da interface gráfica ----
+# Configuração da janela principal
 janela = tk.Tk()
-janela.title("Sorteador")
-janela.geometry("300x270+400+150")
+janela.title("Sorteador de Números")
+janela.geometry("400x400")
+janela.configure(bg="#f7f7f7")
 janela.resizable(False, False)
 
-titulo_label = tk.Label(janela, text="Sorteador de Número", font=("Arial", 16))
-titulo_label.place(x=45, y=10)
+# Título
+titulo_label = tk.Label(janela, text="Sorteador de Números", font=("Arial Rounded MT Bold", 20), bg="#f7f7f7", fg="#333")
+titulo_label.pack(pady=20)
 
-texto_label = tk.Label(janela, text="Sortear entre", font=("Arial", 12))
-texto_label.place(x=23, y=60)
-texto2_label = tk.Label(janela, text="e", font=("Arial", 12))
-texto2_label.place(x=183, y=60)
+# Frame para entrada de números
+frame_entrada = tk.Frame(janela, bg="#f7f7f7")
+frame_entrada.pack(pady=10)
 
-num_inicio = tk.Entry(janela, width=9)
-num_inicio.place(x=121, y=63)
-num_final = tk.Entry(janela, width=9)
-num_final.place(x=203, y=63)
+texto_label = tk.Label(frame_entrada, text="Sortear entre", font=("Arial", 12), bg="#f7f7f7", fg="#555")
+texto_label.grid(row=0, column=0, padx=10)
 
-botao = tk.Button(janela, text="Sortear", font=("Arial", 12), bg="yellow", command=gerador)
-botao.place(x=120, y=100)
+num_inicio = ttk.Entry(frame_entrada, width=10, font=("Arial", 12))
+num_inicio.grid(row=0, column=1, padx=5)
 
-# ultimo_gerado_label = tk.Label(janela, text="", font=("Arial", 10))
-# ultimo_gerado_label.place(x=80, y=140)
+texto2_label = tk.Label(frame_entrada, text="e", font=("Arial", 12), bg="#f7f7f7", fg="#555")
+texto2_label.grid(row=0, column=2, padx=5)
 
-resultado = tk.Label(janela, text="", font=("Arial", 50))
-resultado.place(x=103, y=160)
+num_final = ttk.Entry(frame_entrada, width=10, font=("Arial", 12))
+num_final.grid(row=0, column=3, padx=5)
 
-credito = tk.Label(janela, text="© 2023 Caike Cunha", font=("Arial", 10))
-credito.place(x=5, y=245)
+# Botão para sortear
+def botao_hover_in(event):
+    botao.config(bg="#4CAF50", fg="#fff")
 
-versao = tk.Label(janela, text="v1.0.0", font=("Arial", 10))
-versao.place(x=250, y=245)
+def botao_hover_out(event):
+    botao.config(bg="#fff", fg="#4CAF50")
+
+botao = tk.Button(janela, text="Sortear", font=("Arial", 12, "bold"), bg="#fff", fg="#4CAF50", relief="flat", command=gerador)
+botao.pack(pady=20)
+botao.bind("<Enter>", botao_hover_in)
+botao.bind("<Leave>", botao_hover_out)
+
+# Resultado
+resultado = tk.Label(janela, text="", font=("Arial Rounded MT Bold", 50), bg="#f7f7f7", fg="#333")
+resultado.pack(pady=20)
+
+# Créditos e versão
+rodape_frame = tk.Frame(janela, bg="#f7f7f7")
+rodape_frame.pack(side="bottom", fill="x", pady=10)
+
+credito = tk.Label(rodape_frame, text="© 2023 Caike Cunha", font=("Arial", 10), bg="#f7f7f7", fg="#888")
+credito.pack(side="left", padx=10)
+
+versao = tk.Label(rodape_frame, text="v1.0.0", font=("Arial", 10), bg="#f7f7f7", fg="#888")
+versao.pack(side="right", padx=10)
 
 janela.mainloop()
+
