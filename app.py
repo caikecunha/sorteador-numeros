@@ -15,14 +15,14 @@ def gerador():
             inicio = int(inicio)
             final = int(final)
             if final <= inicio:
-                messagebox.showinfo("Sorteador", "O número final não pode ser menor ou igual do que o número inicial.")
+                messagebox.showwarning("Sorteador", "O número final deve ser maior que o número inicial.")
             elif final > 10000:
-                messagebox.showinfo("Sorteador", "Não é possível sortear números acima de 10.000")
+                messagebox.showwarning("Sorteador", "Não é possível sortear números acima de 10.000")
             else:
                 numero_gerado = random.randint(inicio, final)
                 resultado["text"] = numero_gerado
         except:
-            messagebox.showinfo("Sorteador", "Verifique se você digitou valores válidos.")
+            messagebox.showinfo("Sorteador", "Por favor, verifique se os valores inseridos são válidos.")
 
 # Configuração da janela principal
 janela = tk.Tk()
@@ -78,4 +78,3 @@ versao = tk.Label(rodape_frame, text="v1.0.0", font=("Arial", 10), bg="#f7f7f7",
 versao.pack(side="right", padx=10)
 
 janela.mainloop()
-
